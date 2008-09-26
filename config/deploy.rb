@@ -30,4 +30,4 @@ end
 task :link_database_config do
   run "ln -s #{deploy_to}/shared/system/database.yml #{deploy_to}/current/config/database.yml"
 end
-before "deploy:migrate", :link_database_config
+after "deploy:symlink", :link_database_config
