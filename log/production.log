@@ -1,0 +1,18 @@
+
+
+Processing HomeController#index (for 192.168.75.127 at 2008-09-26 11:12:12) [GET]
+  Session ID: 70269d5e42bec7a154a61f6289a4c441
+  Parameters: {"action"=>"index", "controller"=>"home"}
+DEPRECATION WARNING: You're using the Ruby-based MySQL library that ships with Rails. This library will be REMOVED FROM RAILS 2.2. Please switch to the offical mysql gem: `gem install mysql`  See http://www.rubyonrails.org/deprecation for details. (called from mysql_connection at /usr/lib/ruby/gems/1.8/gems/activerecord-2.1.1/lib/active_record/connection_adapters/mysql_adapter.rb:81)
+Rendering template within layouts/application
+Rendering home/index
+Completed in 0.00977 (102 reqs/sec) | Rendering: 0.00569 (58%) | DB: 0.00031 (3%) | 200 OK [http://technology/helpdesk]
+
+
+Processing HomeController#index (for 192.168.75.127 at 2008-09-26 11:12:30) [GET]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--87cb6064d9570d22b45da17d9ec6dec2732ad64e
+  Parameters: {"action"=>"index", "controller"=>"home"}
+Rendering template within layouts/application
+Rendering home/index
+Completed in 0.00109 (916 reqs/sec) | Rendering: 0.00091 (83%) | DB: 0.00000 (0%) | 200 OK [http://technology/helpdesk]
