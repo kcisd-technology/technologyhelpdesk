@@ -1,4 +1,8 @@
 class RolesController < ApplicationController
+  
+  before_filter :login_required
+  access_control [:index, :show, :new, :create, :edit, :update] => 'admin'
+  
   # GET /roles
   # GET /roles.xml
   def index

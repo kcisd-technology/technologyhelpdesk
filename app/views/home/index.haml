@@ -1,4 +1,7 @@
 %h1{:align=>'center'} Technology Help Desk
 %h2{:align=>'center', :style=>'color: red'} Coming Soon
-#links{:align=>'center'}
-  =link_to "PHPmyAdmin on technology", 'http://technology/phpmyadmin', :target => '_new'
+#links
+  %ul
+    -restrict_to "admin" do
+      %li= link_to "PHPmyAdmin on technology", 'http://technology/phpmyadmin', :target => '_new'
+    %li= user_auth_link
