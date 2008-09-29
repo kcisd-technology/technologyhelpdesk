@@ -9,7 +9,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20080926195224) do
+ActiveRecord::Schema.define(:version => 20080929203926) do
+
+  create_table "roles", :force => true do |t|
+    t.string "title"
+    t.text   "description"
+  end
+
+  create_table "roles_users", :id => false, :force => true do |t|
+    t.integer "user_id"
+    t.integer "role_id"
+  end
 
   create_table "settings", :force => true do |t|
     t.string   "name"

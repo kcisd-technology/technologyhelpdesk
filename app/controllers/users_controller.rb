@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
-  # Be sure to include AuthenticationSystem in Application Controller instead
-  include AuthenticatedSystem
   
+  before_filter :login_required
+  access_control [:new, :create] => 'admin' 
 
   # render new.rhtml
   def new
