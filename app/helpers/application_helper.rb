@@ -3,7 +3,7 @@ module ApplicationHelper
   
   def user_auth_link
     if current_user
-      link_to "Logout", logout_path
+      link_to "Logout [#{current_user.login}]", logout_path
     else
       link_to "Login", login_path
     end
