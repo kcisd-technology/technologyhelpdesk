@@ -1,0 +1,16 @@
+%h2 Software Administration
+-form_for(@software) do |f|
+  = f.error_messages
+  %p
+    = f.label :title
+    %br/
+    = f.text_field :title
+  %p
+    = f.label :copies
+    %br/
+    = f.text_field :copies
+  %p
+    = f.submit "Update"
+= link_to 'Show', @software
+|
+= link_to 'Back', softwares_path
