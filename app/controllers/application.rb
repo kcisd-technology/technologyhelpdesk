@@ -19,6 +19,6 @@ class ApplicationController < ActionController::Base
 
   def permission_denied
     flash[:notice] = "You don't have privileges to access this action"
-    return redirect_to root_url
+    return(redirect_to root_url)
   end
 end
