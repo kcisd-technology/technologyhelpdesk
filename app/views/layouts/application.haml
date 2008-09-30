@@ -2,15 +2,21 @@
 %html
   %head
     %title Technology Help Desk
+    =stylesheet_link_tag 'application'
   %body
-    %h1{:align=>'center'} Technology Help Desk
-    %h2{:align=>'center', :style=>'color: red'} Coming Soon
-    %p{:style=>'color: green'}= flash[:notice]
-    #links
-      %ul
-        %li= user_auth_link
-        -restrict_to "admin" do
-          %li= link_to "PHPmyAdmin on technology", 'http://technology/phpmyadmin', :target => '_new'
-          %li= link_to "User Management", users_path
-          %li= link_to "Role Management", roles_path
-    =yield
+    #pageWrapper
+      #pageTitle
+        %h1{:align=>'center'} Technology Help Desk
+        %h2{:align=>'center', :style=>'color: red'} Coming Soon
+      #sideBar
+        #links
+          %ul
+            %li= user_auth_link
+            -restrict_to "admin" do
+              %li= link_to "PHPmyAdmin", 'http://technology/phpmyadmin', :target => '_new'
+              %li= link_to "User Management", users_path
+              %li= link_to "Role Management", roles_path
+      #pageContent
+        #flashNotice= flash[:notice]
+        =yield
+      #pageFooter= ' '
