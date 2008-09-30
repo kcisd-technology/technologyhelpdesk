@@ -62,6 +62,14 @@ class User < ActiveRecord::Base
     self.remember_token            = nil
     save(false)
   end
+  
+  def role_check( logicstring )
+    rh = Caboose::RoleHandler.new
+    rh.process( logicstring, :user => self)
+  end
+  def is_admin?
+    self.role_check('admin')
+  end
 
   # Returns true if the user has just been activated.
   def recently_activated?
