@@ -1,7 +1,15 @@
 class UsersController < ApplicationController
   
   before_filter :login_required
-  access_control [:new, :create] => 'admin' 
+  access_control [:index, :show, :new, :create] => 'admin' 
+
+  def index
+    @users = User.all
+  end
+  
+  def show
+    redirect_to users_url
+  end
 
   # render new.rhtml
   def new
@@ -21,6 +29,16 @@ class UsersController < ApplicationController
       flash[:notice] = "Thanks for signing up!"
     else
       render :action => 'new'
+    end
+  end
+  
+  def destroy
+    @user = User.find(params[:id])
+    @user.destroy
+
+    respond_to do |format|
+      format.html { redirect_to(users_url) }
+      format.xml  { head :ok }
     end
   end
 
