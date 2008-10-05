@@ -1,0 +1,22 @@
+<h1>Listing notations</h1>
+
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Body</th>
+  </tr>
+
+<% for notation in @notations %>
+  <tr>
+    <td><%=h notation.title %></td>
+    <td><%=h notation.body %></td>
+    <td><%= link_to 'Show', notation %></td>
+    <td><%= link_to 'Edit', edit_notation_path(notation) %></td>
+    <td><%= link_to 'Destroy', notation, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New notation', new_notation_path %>

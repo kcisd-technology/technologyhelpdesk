@@ -1,0 +1,13 @@
+<p>
+  <b>Title:</b>
+  <%=h @notation.title %>
+</p>
+
+<p>
+  <b>Body:</b>
+  <%=h @notation.body %>
+</p>
+
+
+<%= link_to 'Edit', edit_notation_path(@notation) %> |
+<%= link_to 'Back', notations_path %>
