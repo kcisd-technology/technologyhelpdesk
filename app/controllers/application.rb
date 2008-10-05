@@ -16,6 +16,10 @@ class ApplicationController < ActionController::Base
   include AuthenticatedSystem
   
   protected
+  
+  def set_current_user
+    User.current_user = current_user
+  end
 
   def permission_denied
     flash[:notice] = "You don't have privileges to access this action"

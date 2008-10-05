@@ -1,5 +1,5 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :notations
+  map.resources :comments
 
   map.resources :softwares
 
