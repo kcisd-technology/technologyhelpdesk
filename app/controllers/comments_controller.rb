@@ -9,6 +9,12 @@ class CommentsController < ApplicationController
       format.xml  { render :xml => @comments }
     end
   end
+  
+  before_filter(:only=>[:new, :create, :edit, :update]) do |controller|
+    if controller.params[:return_to]
+      controller.session[:return_to] = controller.params[:return_to]
+    end
+  end
 
   # GET /comments/1
   # GET /comments/1.xml
@@ -16,7 +22,13 @@ class CommentsController < ApplicationController
     @comment = Comment.find(params[:id])
 
     respond_to do |format|
-      format.html # show.html.erb
+      format.html {
+        r = session[:return_to]
+        if r
+          session[:return_to] = nil
+          redirect_to r
+        end
+      }
       format.xml  { render :xml => @comment }
     end
   end

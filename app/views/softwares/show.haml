@@ -7,3 +7,15 @@
 =link_to 'Edit', edit_software_path(@software)
 |
 =link_to 'Back', softwares_path
+%div
+  %h2 Comments
+  %hr/
+  =render(:partial => 'comments/comment', :collection => @software.comments) unless @software.comments.empty?
+-form_for Comment.new do |f|
+  =hidden_field_tag :return_to, url_for(@software)
+  =f.hidden_field :commentable_id, :value => @software.id
+  =f.hidden_field :commentable_type, :value => @software.class
+  ="Title: "+f.text_field(:title)
+  %div Body:
+  =f.text_area :body
+  =submit_tag 'Add Comment'
