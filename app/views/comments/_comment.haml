@@ -1,0 +1,11 @@
+-level ||= 0
+%div{:style=>"margin-left:#{level*5}px"}
+  %b= comment.title
+  %i= "By: " + ((comment.user && comment.user.login) || 'nobody')
+  %br/
+  %div= comment.body
+  -unless comment.comments.empty?
+    %div{:style=>'border-left:1px dotted red; padding-bottom:5px; margin-left:5px;'}
+      %hr/
+      =render :partial=> 'comments/comment', :collection => comment.comments, :locals => { :level => level + 1 }
+  %hr/

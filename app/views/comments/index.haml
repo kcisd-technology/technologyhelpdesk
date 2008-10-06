@@ -1,0 +1,16 @@
+%h1 Listing comments
+%table
+  %tr
+    %th Title
+    %th Body
+    %th User
+  -for comment in @comments
+    %tr>
+      %td=h comment.title
+      %td=h comment.body
+      %td=h comment.user ? comment.user.login : 'nobody'
+      %td= link_to 'Show', comment
+      %td= link_to 'Edit', edit_comment_path(comment)
+      %td= link_to 'Destroy', comment, :confirm => 'Are you sure?', :method => :delete
+%br/
+=link_to 'New comment', new_comment_path
