@@ -1,4 +1,5 @@
 %h2 User Administration
+=will_paginate @users
 %table
   %tr
     %th Login Name
@@ -10,4 +11,5 @@
       %td= link_to 'Edit', edit_user_path(user)
       %td= link_to 'Destroy', user, :confirm => 'Are you sure?', :method => :delete
 %br/
+=will_paginate @users
 =link_to "New User", new_user_url

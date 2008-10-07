@@ -1,5 +1,10 @@
 %h2= @user.login
 %div= @user.email
+%div
+  %p User Roles
+  %ul
+    -@user.roles.each do |role|
+      %li= role.title
 %br/
 %div
   =link_to "Edit", edit_user_path(@user)

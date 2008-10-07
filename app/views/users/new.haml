@@ -16,4 +16,5 @@
     %label{:for=>"password_confirmation"} Confirm Password
     %br/
     =f.password_field :password_confirmation
+  =render :partial => 'roles', :locals => {:f => f}
   %p= submit_tag 'Create User'

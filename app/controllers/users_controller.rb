@@ -4,16 +4,17 @@ class UsersController < ApplicationController
   access_control [:index, :show, :new, :create, :edit, :update] => 'admin' 
 
   def index
-    @users = User.all
+    @users = User.paginate :page => params[:page],
+      :order => 'login'
   end
   
   def show
-    #redirect_to users_url
     @user = User.find(params[:id])
   end
 
   # render new.rhtml
   def new
+    @user = User.new
   end
 
   def create
@@ -26,6 +27,7 @@ class UsersController < ApplicationController
     @user.save
     if @user.errors.empty?
       #self.current_user = @user
+      @user.role_ids = params[:roles]
       redirect_back_or_default(@user)
       flash[:notice] = "User was created"
     else
