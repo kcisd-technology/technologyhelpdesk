@@ -4,6 +4,9 @@
   %i= "By: " + ((comment.user && comment.user.login) || 'nobody')
   %br/
   %div= comment.body
+  -if comment.full_control_by_current_user?
+    %div
+      =link_to link_to 'Destroy', comment_path(comment, :return_to => '/blah'), :confirm => 'Are you sure?', :method => :delete
   -unless comment.comments.empty?
     %div{:style=>'border-left:1px dotted red; padding-bottom:5px; margin-left:5px;'}
       %hr/

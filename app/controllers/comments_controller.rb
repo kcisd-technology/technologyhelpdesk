@@ -1,4 +1,9 @@
 class CommentsController < ApplicationController
+  
+  before_filter :login_required
+  access_control :DEFAULT => 'admin'
+  
+  before_filter :check_for_return_to
   # GET /comments
   # GET /comments.xml
   def index
@@ -9,12 +14,6 @@ class CommentsController < ApplicationController
       format.xml  { render :xml => @comments }
     end
   end
-  
-  before_filter(:only=>[:new, :create, :edit, :update]) do |controller|
-    if controller.params[:return_to]
-      controller.session[:return_to] = controller.params[:return_to]
-    end
-  end
 
   # GET /comments/1
   # GET /comments/1.xml
@@ -23,10 +22,9 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       format.html {
-        r = session[:return_to]
-        if r
+        if session[:return_to]
+          redirect_to session[:return_to]
           session[:return_to] = nil
-          redirect_to r
         end
       }
       format.xml  { render :xml => @comment }
@@ -90,8 +88,17 @@ class CommentsController < ApplicationController
     @comment.destroy
 
     respond_to do |format|
-      format.html { redirect_to(comments_url) }
+      format.html { redirect_to(:back) }
       format.xml  { head :ok }
     end
   end
+  
+  protected
+  
+  def check_for_return_to
+    if params[:return_to]
+      session[:return_to] = params[:return_to]
+    end
+  end
+  
 end

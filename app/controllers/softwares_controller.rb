@@ -1,5 +1,6 @@
 class SoftwaresController < ApplicationController
   
+  before_filter :login_required
   access_control :DEFAULT => 'admin'
   # GET /softwares
   # GET /softwares.xml
