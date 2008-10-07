@@ -6,7 +6,7 @@
   %div= comment.body
   -if comment.full_control_by_current_user?
     %div
-      =link_to link_to 'Edit', edit_comment_path(comment, :return_to => url_for(request.path))
+      =link_to link_to 'Edit', edit_comment_path(comment, :return_to => url_for(request.request_uri))
       |
       =link_to link_to 'Destroy', comment, :confirm => 'Are you sure?', :method => :delete
   -unless comment.comments.empty?
