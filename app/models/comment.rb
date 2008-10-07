@@ -5,6 +5,9 @@ class Comment < ActiveRecord::Base
   has_many :comments, :as => :commentable, :dependent => :destroy
   
   validates_size_of :title, :within => 1..255
+  validates_presence_of :body
+  
+  acts_as_textiled :body
   
   def before_create
     self.user_id = (User.current_user && User.current_user.id)
