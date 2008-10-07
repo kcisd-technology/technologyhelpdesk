@@ -1,0 +1,17 @@
+%h2= "Editing #{@user.login}"
+-form_for @user do |f|
+  =f.error_messages
+  %p
+    =f.label :email
+    %br/
+    = f.text_field :email
+  %div
+    -Role.all.each do |role|
+      %span{:style=>'display:inline-block;width:100px'}
+        =check_box_tag 'roles[]', role.id, @user.role_check(role.title)
+        =role.title
+  %p
+    =f.submit "Update"
+=link_to 'Show', @user
+|
+=link_to 'Back', users_path

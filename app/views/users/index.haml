@@ -5,8 +5,9 @@
     %th Email
   -@users.each do |user|
     %tr
-      %td= link_to user.login, edit_user_path(user)
+      %td= link_to user.login, user
       %td= user.email
+      %td= link_to 'Edit', edit_user_path(user)
       %td= link_to 'Destroy', user, :confirm => 'Are you sure?', :method => :delete
 %br/
 =link_to "New User", new_user_url
