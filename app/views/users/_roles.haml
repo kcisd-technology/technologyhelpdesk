@@ -1,0 +1,6 @@
+%div
+  %h3 User Roles
+  -Role.all.each do |role|
+    %span{:style=>'display:inline-block;width:125px'}
+      =check_box_tag 'roles[]', role.id, @user.role_check(role.title)
+      =role.title
