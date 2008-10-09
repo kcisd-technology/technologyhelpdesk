@@ -1,0 +1,30 @@
+= Acts as Textile
+
+by Pawel Dzioba <pdzioba@me.com>
+
+GitHub Project: http://github.com/pdzioba/acts_as_textile
+
+
+== Description:
+
+Allows you to specify columns of an ActiveRecord model that contain Textile.
+You may then use +to_s+ to get the original markup text or +to_html+ to get
+the formated HTML.
+
+== Example:
+
+    class Page < ActiveRecord::Base
+      acts_as_textile :body
+    end
+
+    @page = Page.find(:first)
+    @page.body.to_s     #=> "h2. Textile Headline"
+    @page.body.to_html  #=> "<h2>Textile Headline</h2>"
+
+== Requirements:
+
+You will need the RedCloth[http://redcloth.org] library for processing the Textile text.
+
+== Install:
+
+    script/plugin install git://github.com/pdzioba/acts_as_textile.git

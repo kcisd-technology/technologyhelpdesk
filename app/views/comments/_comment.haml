@@ -1,9 +1,11 @@
 -level ||= 0
 %div{:style=>"margin-left:#{level*5}px"}
   %b= comment.title
-  %i= "By: " + ((comment.user && comment.user.login) || 'nobody')
+  %i= "By: #{((comment.user && comment.user.login) || 'nobody')} on #{comment.created_at.strftime("%d %b %Y %I:%M%p")}"
   %br/
-  %div= comment.body
+  %i= "Last Update: #{comment.updated_at.strftime("%d %b %Y %I:%M%p")}"
+  %br/
+  %div= comment.body.to_html
   -if comment.full_control_by_current_user?
     %div
       =link_to link_to 'Edit', edit_comment_path(comment, :return_to => url_for(request.request_uri))

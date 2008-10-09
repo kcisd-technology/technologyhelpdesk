@@ -5,9 +5,8 @@
     %th Copies
   -for software in @softwares
     %tr
-      %td=h software.title
+      %td= link_to software.title, software
       %td=h software.copies
-      %td= link_to 'Show', software
       %td= link_to 'Edit', edit_software_path(software)
       %td= link_to 'Destroy', software, :confirm => 'Are you sure?', :method => :delete
 %br/

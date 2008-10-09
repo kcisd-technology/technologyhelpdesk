@@ -7,7 +7,8 @@ class Comment < ActiveRecord::Base
   validates_size_of :title, :within => 1..255
   validates_presence_of :body
   
-  acts_as_textiled :body
+  acts_as_textile :body
+  #acts_as_markup :language => :redcloth, :columns => [:body]
   
   def before_create
     self.user_id = (User.current_user && User.current_user.id)
