@@ -2,8 +2,6 @@ class CommentsController < ApplicationController
   
   before_filter :login_required
   access_control :DEFAULT => 'admin'
-  
-  before_filter :check_for_return_to
   # GET /comments
   # GET /comments.xml
   def index
@@ -35,6 +33,7 @@ class CommentsController < ApplicationController
   # GET /comments/new.xml
   def new
     @comment = Comment.new
+    session[:return_to] = request.env['HTTP_REFERER']
 
     respond_to do |format|
       format.html # new.html.erb
@@ -45,6 +44,7 @@ class CommentsController < ApplicationController
   # GET /comments/1/edit
   def edit
     @comment = Comment.find(params[:id])
+    session[:return_to] = request.env['HTTP_REFERER']
   end
 
   # POST /comments
@@ -90,14 +90,6 @@ class CommentsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to(:back) }
       format.xml  { head :ok }
-    end
-  end
-  
-  protected
-  
-  def check_for_return_to
-    if params[:return_to]
-      session[:return_to] = params[:return_to]
     end
   end
   
