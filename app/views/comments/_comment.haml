@@ -11,6 +11,8 @@
       =link_to link_to 'Edit', edit_comment_path(comment)
       |
       =link_to link_to 'Destroy', comment, :confirm => 'Are you sure?', :method => :delete
+      |
+      =link_to "New Comment", new_comment_path(:parent_id => comment.id, :parent_type => "Comment")
   -unless comment.comments.empty?
     %div{:style=>'border-left:1px dotted red; padding-bottom:5px; margin-left:5px;'}
       %hr/

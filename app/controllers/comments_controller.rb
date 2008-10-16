@@ -33,6 +33,8 @@ class CommentsController < ApplicationController
   # GET /comments/new.xml
   def new
     @comment = Comment.new
+    @comment.commentable_id = params[:parent_id]
+    @comment.commentable_type = params[:parent_type]
     session[:return_to] = request.env['HTTP_REFERER']
 
     respond_to do |format|
