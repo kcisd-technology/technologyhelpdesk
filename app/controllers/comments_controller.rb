@@ -2,8 +2,6 @@ class CommentsController < ApplicationController
   
   before_filter :login_required
   access_control :DEFAULT => 'admin'
-  
-  before_filter :check_for_return_to
   # GET /comments
   # GET /comments.xml
   def index
@@ -94,14 +92,6 @@ class CommentsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to(:back) }
       format.xml  { head :ok }
-    end
-  end
-  
-  protected
-  
-  def check_for_return_to
-    if params[:return_to]
-      session[:return_to] = params[:return_to]
     end
   end
   

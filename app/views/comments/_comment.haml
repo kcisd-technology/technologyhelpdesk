@@ -8,11 +8,11 @@
   %div= comment.body.to_html
   -if comment.full_control_by_current_user?
     %div
-      =link_to 'Edit', edit_comment_path(comment)
+      =link_to link_to 'Edit', edit_comment_path(comment)
       |
-      =link_to 'Destroy', comment, :confirm => 'Are you sure?', :method => :delete
+      =link_to link_to 'Destroy', comment, :confirm => 'Are you sure?', :method => :delete
       |
-      =link_to 'New Comment', new_comment_path(:parent_id => comment.id, :parent_type => 'Comment')
+      =link_to "New Comment", new_comment_path(:parent_id => comment.id, :parent_type => "Comment")
   -unless comment.comments.empty?
     %div{:style=>'border-left:1px dotted red; padding:5px; margin-left:0px;'}
       =render :partial=> 'comments/comment', :collection => comment.comments, :locals => { :level => level + 1 }
