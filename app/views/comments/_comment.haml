@@ -12,7 +12,7 @@
       |
       =link_to link_to 'Destroy', comment, :confirm => 'Are you sure?', :method => :delete
       |
-      =link_to "New Comment", new_comment_path(:parent_id => comment.id, :parent_type => "Comment")
+      =link_to "New Comment for #{comment.title}", new_comment_path(:parent_id => comment.id, :parent_type => "Comment")
   -unless comment.comments.empty?
     %div{:style=>'border-left:1px dotted red; padding:5px; margin-left:0px;'}
       =render :partial=> 'comments/comment', :collection => comment.comments, :locals => { :level => level + 1 }
