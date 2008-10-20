@@ -69,11 +69,10 @@ class User < ActiveRecord::Base
   end
   
   def role_check( logicstring )
-    rh = Caboose::RoleHandler.new
-    rh.process( logicstring, :user => self)
+    Caboose::RoleHandler.new.process( logicstring, :user => self)
   end
   def is_admin?
-    self.role_check('admin')
+    login == 'root' || roles.map(&:title).include?('admin')
   end
 
   # Returns true if the user has just been activated.
