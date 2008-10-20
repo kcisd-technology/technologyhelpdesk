@@ -53,9 +53,7 @@ class CommentsController < ApplicationController
   # POST /comments.xml
   def create
     @comment = Comment.new(params[:comment])
-    unless request.env['HTTP_REFERER'] == new_comment_url
-      session[:return_to] = request.env['HTTP_REFERER']
-    end
+    session[:return_to] = request.env['HTTP_REFERER']
 
     respond_to do |format|
       if @comment.save
