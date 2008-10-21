@@ -77,7 +77,8 @@ class User < ActiveRecord::Base
   end
   
   def gravatar_url( rating = 'g' )
-    "http://www.gravatar.com/avatar/#{MD5::md5(self.email)}?r=#{rating}"
+    @gravatar_encoded_email || = MD5::md5(self.email)
+    "http://www.gravatar.com/avatar/#{@gravatar_encoded_email}?r=#{rating}"
   end
 
   # Returns true if the user has just been activated.
