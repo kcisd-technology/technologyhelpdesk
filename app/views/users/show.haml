@@ -1,5 +1,7 @@
-%h2= @user.login
-%div= @user.email
+%div
+  %img{:src=> @user.gravatar_url+'&s=100', :style=> 'float:right'}/
+  %h2= @user.login
+  %div= @user.email
 %div
   %p User Roles
   %ul

@@ -2,10 +2,13 @@
 =will_paginate @users
 %table
   %tr
+    %th
     %th Login Name
     %th Email
   -@users.each do |user|
     %tr
+      %td
+        %img{:src=> user.gravatar_url+'&s=50'}/
       %td= link_to user.login, user
       %td= user.email
       %td= link_to 'Edit', edit_user_path(user)
