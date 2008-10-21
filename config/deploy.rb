@@ -1,5 +1,5 @@
 set :application, "Technology Helpdesk"
-set :repository,  "git@github.com:wadewest/technolgoyhelpdesk.git"
+set :repository,  "git@github.com:wadewest/technolgyhelpdesk.git"
 set :scm, :git
 set :branch, 'master'
 set :user, 'wadewest'
