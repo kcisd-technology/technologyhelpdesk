@@ -9,6 +9,9 @@
         %h1{:align=>'center'} Technology Help Desk
         %h2{:align=>'center', :style=>'color: red'} Coming Soon
       #sideBar
+        -if logged_in?
+          #gravatar{:style => 'padding-left:15px'}
+            %img{:src => current_user.gravatar_url}/
         %ul#navigation
           %li= link_to "Home", root_path
           %li= user_auth_link

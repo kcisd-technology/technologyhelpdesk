@@ -1,4 +1,5 @@
 require 'digest/sha1'
+require 'md5'
 class User < ActiveRecord::Base
   has_and_belongs_to_many :roles
   has_many :comments, :as => :commentable
@@ -73,6 +74,10 @@ class User < ActiveRecord::Base
   end
   def is_admin?
     login == 'root' || roles.map(&:title).include?('admin')
+  end
+  
+  def gravatar_url( rating = 'g' )
+    "http://www.gravatar.com/avatar/#{MD5::md5(self.email)}?r=#{rating}"
   end
 
   # Returns true if the user has just been activated.
