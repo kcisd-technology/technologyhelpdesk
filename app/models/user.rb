@@ -91,9 +91,11 @@ class User < ActiveRecord::Base
   end
   
   def gravatar( options = {} )
-    html_options = HashWithIndifferentAccess.new(options.delete(:options))
+    html_options = options.delete(:options)
+    html_options[:alt] ||= ''
     ActionController::Base.helpers.image_tag(
-      self.gravatar_url(options), html_options )
+      self.gravatar_url(options), 
+      HashWithIndifferentAccess.new(html_options) )
   end
 
   # Returns true if the user has just been activated.
