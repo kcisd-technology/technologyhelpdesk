@@ -76,9 +76,24 @@ class User < ActiveRecord::Base
     login == 'root' || roles.map(&:title).include?('admin')
   end
   
-  def gravatar_url( rating = 'g' )
-    @gravatar_encoded_email || = MD5::md5(self.email)
-    "http://www.gravatar.com/avatar/#{@gravatar_encoded_email}?r=#{rating}"
+  def gravatar_url( options = {} )
+    options = {
+      :rating => 'g',
+      :size => '80'
+    }.merge(options || {})
+    parameters = {
+      'r' => options[:rating].to_s,
+      's' => options[:size].to_s
+    }.map{|k,v| v.empty? ? nil : [k,v].join('=')}.compact.join('&')
+    @gravatar_encoded_email ||= MD5::md5(self.email.downcase).to_s
+    gravatar_url = "http://www.gravatar.com/avatar/"
+    gravatar_url+@gravatar_encoded_email+(parameters.empty? ? '' : "?#{parameters}")
+  end
+  
+  def gravatar( options = {} )
+    html_options = HashWithIndifferentAccess.new(options.delete(:options))
+    ActionController::Base.helpers.image_tag(
+      self.gravatar_url(options), html_options )
   end
 
   # Returns true if the user has just been activated.
