@@ -3,6 +3,7 @@
 %div{:style=>"margin-left:#{level*5}px"}
   =comment.user.gravatar(:size => 60, :options => {:style=> 'float:left;margin-right:5px'})
   %b= comment.title
+  %br/
   %i= "By: #{((comment.user && comment.user.login) || 'nobody')} on #{comment.created_at.strftime("%d %b %Y %I:%M%p")}"
   %br/
   %i= "Last Update: #{comment.updated_at.strftime("%d %b %Y %I:%M%p")}"
