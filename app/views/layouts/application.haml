@@ -22,7 +22,4 @@
       #pageContent
         #flashNotice= flash[:notice]
         =yield
-        -if RAILS_ENV == 'development'
-          %pre= debug request
-          %pre= debug session
       #pageFooter= ' '
