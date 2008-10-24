@@ -11,12 +11,11 @@
       #sideBar
         -if logged_in?
           #gravatar{:style => 'padding-left:15px'}
-            %img{:src => current_user.gravatar_url}/
+            =current_user.gravatar
         %ul#navigation
           %li= link_to "Home", root_path
           %li= user_auth_link
           -restrict_to "admin" do
-            %li= link_to "PHPmyAdmin", 'http://technology/phpmyadmin', :target => '_new'
             %li= link_to "User Management", users_path
             %li= link_to "Role Management", roles_path
             %li= link_to "Software Management", softwares_path

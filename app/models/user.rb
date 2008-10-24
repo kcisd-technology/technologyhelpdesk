@@ -91,7 +91,7 @@ class User < ActiveRecord::Base
   end
   
   def gravatar( options = {} )
-    html_options = options.delete(:options)
+    html_options = options.delete(:options) || {}
     html_options[:alt] ||= ''
     ActionController::Base.helpers.image_tag(
       self.gravatar_url(options), 
