@@ -4,7 +4,6 @@ class Comment < ActiveRecord::Base
   
   has_many :comments, :as => :commentable, :dependent => :destroy
   
-  validates_size_of :title, :within => 1..255
   validates_presence_of :body
   
   acts_as_textile :body

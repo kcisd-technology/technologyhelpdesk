@@ -15,7 +15,6 @@
   =hidden_field_tag :return_to, url_for(@software)
   =f.hidden_field :commentable_id, :value => @software.id
   =f.hidden_field :commentable_type, :value => @software.class
-  ="Title: "+f.text_field(:title)
-  %div Body:
+  %h3 New Comment
   =f.text_area :body
   =submit_tag 'Add Comment'

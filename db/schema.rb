@@ -9,10 +9,9 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20081005181639) do
+ActiveRecord::Schema.define(:version => 20081028185722) do
 
   create_table "comments", :force => true do |t|
-    t.string   "title"
     t.text     "body"
     t.integer  "user_id"
     t.integer  "commentable_id"
