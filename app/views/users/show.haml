@@ -1,5 +1,5 @@
 %div
-  %img{:src=> @user.gravatar_url+'&s=100', :style=> 'float:right'}/
+  %img{:src=> @user.gravatar(:size => 100), :style=> 'float:right'}/
   %h2= @user.login
   %div= @user.email
 %div
