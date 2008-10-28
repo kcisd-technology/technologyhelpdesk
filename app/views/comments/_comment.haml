@@ -2,11 +2,9 @@
 -max_level ||= 5
 %div{:style=>"margin-left:#{level*5}px"}
   =comment.user.gravatar(:size => 60, :options => {:style=> 'float:left;margin-right:5px'})
-  %i= "By: #{((comment.user && comment.user.login) || 'nobody')} said on #{comment.created_at.strftime("%d %b %Y %I:%M%p")}"
+  %i= "#{((comment.user && comment.user.login) || 'nobody')} said on #{comment.created_at.strftime("%d %b %Y %I:%M%p")}"
   %br/
-  %i= "Last Update: #{comment.updated_at.strftime("%d %b %Y %I:%M%p")}"
-  %br/
-  %div{:style=> 'clear:both;padding-top:2px'}= comment.body.to_html
+  %i= "Last Updated: #{comment.updated_at.strftime("%d %b %Y %I:%M%p")}"
   -if comment.full_control_by_current_user?
     %div
       =link_to link_to 'Edit', edit_comment_path(comment)
@@ -15,6 +13,8 @@
       -unless max_level <= 1
         |
         =link_to "New Comment", new_comment_path(:parent_id => comment.id, :parent_type => "Comment")
+  %br/
+  %div{:style=> 'clear:both;padding-top:2px'}= comment.body.to_html
   -unless max_level <= 1 || comment.comments.empty?
     %div{:style=>'border-left:1px dotted red; padding:5px; margin-top:5px;'}
       =render :partial=> 'comments/comment', :collection => comment.comments, :locals => { :level => level + 1, :max_level => max_level - 1 }
