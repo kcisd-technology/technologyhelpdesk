@@ -26,4 +26,19 @@ class ApplicationController < ActionController::Base
     flash[:notice] = "You don't have privileges to access this action"
     return(redirect_to root_url)
   end
+  
+  helper_method :add_js_files
+  def add_js_files(*args)
+    @included_javascript_files ||= ['prototype', 'application'];
+    if args.size > 1
+      args.each do |arg|
+        add_js_files(arg);
+      end
+    else
+      case args
+      when Hash then @included_javascript_files << url_for(args);
+      else @included_javascript_files << args;
+      end
+    end
+  end
 end
