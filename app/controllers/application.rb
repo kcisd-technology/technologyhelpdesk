@@ -41,4 +41,19 @@ class ApplicationController < ActionController::Base
       end
     end
   end
+  
+  helper_method :add_css_files
+  def add_css_files(*args)
+    @included_css_files ||= ['application'];
+    if args.size > 1
+      args.each do |arg|
+        add_css_files(arg);
+      end
+    else
+      case args
+      when Hash then @included_css_files << url_for(args);
+      else @included_css_files << args;
+      end
+    end
+  end
 end
