@@ -4,12 +4,14 @@
     %th First name
     %th Last name
     %th Middle name
+    %th Login name
     %th Email
-  -for person in @people
+  -@people.each do |person|
     %tr
       %td=h person.first_name
       %td=h person.last_name
       %td=h person.middle_name
+      %td=h person.login_name
       %td=h person.email
       %td= link_to 'Show', person
       %td= link_to 'Edit', edit_person_path(person)

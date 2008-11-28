@@ -16,6 +16,7 @@
           %li= link_to "Home", root_path
           %li= user_auth_link
           -restrict_to "admin" do
+            %li= link_to "Person Management", people_path
             %li= link_to "User Management", users_path
             %li= link_to "Role Management", roles_path
             %li= link_to "Software Management", softwares_path
