@@ -7,11 +7,11 @@
   %body
     #pageWrapper
       #pageTitle
-        %h1{:align=>'center'} Technology Help Desk
-        %h2{:align=>'center', :style=>'color: red'} Coming Soon
+        %h1 Technology Help Desk
+        %h2 Coming Soon
       #sideBar
         -if logged_in?
-          #gravatar{:style => 'padding-left:15px'}= current_user.gravatar
+          #gravatar= current_user.gravatar
         %ul#navigation
           %li= link_to "Home", root_path
           %li= user_auth_link
