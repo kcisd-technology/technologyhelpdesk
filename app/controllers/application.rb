@@ -35,10 +35,11 @@ class ApplicationController < ActionController::Base
         add_js_files(arg);
       end
     else
-      case args
-      when Hash then @included_javascript_files << url_for(args);
-      else @included_javascript_files << args;
+      file = case args
+      when Hash then url_for(args);
+      else args;
       end
+      @included_javascript_files << file unless @included_javascript_files.include?(file)
     end
   end
   
@@ -50,10 +51,11 @@ class ApplicationController < ActionController::Base
         add_css_files(arg);
       end
     else
-      case args
-      when Hash then @included_css_files << url_for(args);
-      else @included_css_files << args;
+      file = case args
+      when Hash then url_for(args);
+      else args;
       end
+      @included_css_files << file unless @included_css_files.include?(file)
     end
   end
 end
