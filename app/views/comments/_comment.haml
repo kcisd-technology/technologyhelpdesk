@@ -16,8 +16,9 @@
         |
         =link_to "New Comment", new_comment_path(:parent_id => comment.id, :parent_type => "Comment")
   %br/
-  .body= comment.body.to_html
-  -unless max_level <= 1 || comment.comments.empty?
-    .children
-      =render :partial=> 'comments/comment', :collection => comment.comments, :locals => { :level => level + 1, :max_level => max_level - 1 }
+  .body
+    =comment.body.to_html
+    -unless max_level <= 1 || comment.comments.empty?
+      .children
+        =render :partial=> 'comments/comment', :collection => comment.comments, :locals => { :level => level + 1, :max_level => max_level - 1 }
   %hr/
