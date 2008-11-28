@@ -1,0 +1,18 @@
+%h1 Listing people
+%table
+  %tr
+    %th First name
+    %th Last name
+    %th Middle name
+    %th Email
+  -for person in @people
+    %tr
+      %td=h person.first_name
+      %td=h person.last_name
+      %td=h person.middle_name
+      %td=h person.email
+      %td= link_to 'Show', person
+      %td= link_to 'Edit', edit_person_path(person)
+      %td= link_to 'Destroy', person, :confirm => 'Are you sure?', :method => :delete
+%br/
+=link_to 'New person', new_person_path
