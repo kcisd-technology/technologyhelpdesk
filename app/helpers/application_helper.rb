@@ -9,8 +9,11 @@ module ApplicationHelper
     end
   end
   
-  def render_comments(object = nil)
-    render(:partial=> 'comments/comment', :collection => object.comments, :locals => { :max_level => 5 }, :spacer_template => 'comments/comments_divider') unless object.comments.empty?;
+  def render_comments(object = nil, divider = 'comments/comments_divider')
+    render(:partial=> 'comments/comment',
+      :collection => object.comments,
+      :locals => { :max_level => 5, :divider => divider },
+      :spacer_template => divider) unless object.comments.empty?;
   end
   
   def javascript_files(partial = nil)

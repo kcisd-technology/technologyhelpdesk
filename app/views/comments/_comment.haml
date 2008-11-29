@@ -1,5 +1,6 @@
 -level ||= 0
 -max_level ||= 5
+-divider ||= 'comments/comments_divider'
 -add_css_files 'comments'
 -add_js_files 'effects', 'comment_scripts'
 .comment{:style=>"margin-left:#{level*5}px"}
@@ -19,4 +20,4 @@
   .body
     =comment.body.to_html
     -unless max_level <= 1 || comment.comments.empty?
-      .children= render_comments comment
+      .children= render_comments(comment, divider);
