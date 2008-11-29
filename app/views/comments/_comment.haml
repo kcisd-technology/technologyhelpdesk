@@ -4,9 +4,10 @@
 -add_js_files 'effects', 'comment_scripts'
 .comment{:style=>"margin-left:#{level*5}px"}
   =comment.user.gravatar(:size => 60, :options => {:style=> 'float:left;margin-right:5px'})
-  %i= "#{((comment.user && comment.user.login) || 'nobody')} said on #{comment.created_at.strftime("%d %b %Y %I:%M%p")}"
-  %br/
-  %i= "Last Updated: #{comment.updated_at.strftime("%d %b %Y %I:%M%p")}"
+  %div
+    ="#{((comment.user && comment.user.login) || 'nobody')} said on #{comment.created_at.strftime("%d %b %Y %I:%M%p")}"
+    %br/
+    %i= "Last Updated: #{comment.updated_at.strftime("%d %b %Y %I:%M%p")}"
   -if comment.full_control_by_current_user?
     .controls
       =link_to link_to 'Edit', edit_comment_path(comment)
@@ -15,10 +16,7 @@
       -unless max_level <= 1
         |
         =link_to "New Comment", new_comment_path(:parent_id => comment.id, :parent_type => "Comment")
-  %br/
   .body
     =comment.body.to_html
     -unless max_level <= 1 || comment.comments.empty?
-      .children
-        =render :partial=> 'comments/comment', :collection => comment.comments, :locals => { :level => level + 1, :max_level => max_level - 1 }
-  %hr/
+      .children= render_comments comment

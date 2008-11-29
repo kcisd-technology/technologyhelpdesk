@@ -14,11 +14,9 @@ var toggleComment = function(e) {
   var commentBody = this.up(".comment").down(".body");
   if(commentBody.visible()){
       Effect.BlindUp(commentBody);
-      //commentBody.hide();
       this.update("Show Comment");
   }else{
       Effect.BlindDown(commentBody);
-      //commentBody.show();
       this.update("Hide Comment");
   }
   e.stop();

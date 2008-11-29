@@ -10,7 +10,7 @@
 %div
   %h2 Comments
   %hr/
-  =render(:partial => 'comments/comment', :collection => @software.comments) unless @software.comments.empty?
+  =render_comments @software
 -form_for Comment.new do |f|
   =hidden_field_tag :return_to, url_for(@software)
   =f.hidden_field :commentable_id, :value => @software.id
