@@ -9,6 +9,10 @@ module ApplicationHelper
     end
   end
   
+  def render_comments(object = nil)
+    render(:partial=> 'comments/comment', :collection => object.comments, :locals => { :max_level => 5 }, :spacer_template => 'comments/comments_divider') unless object.comments.empty?;
+  end
+  
   def javascript_files(partial = nil)
     add_js_files("#{params[:controller]}_#{params[:action]}");
     file_names = @controller.instance_variable_get('@included_javascript_files');
