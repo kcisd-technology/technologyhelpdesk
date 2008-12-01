@@ -1,0 +1,28 @@
+<p>
+  <b>Serial:</b>
+  <%=h @device.serial %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%=h @device.description %>
+</p>
+
+<p>
+  <b>Hostname:</b>
+  <%=h @device.hostname %>
+</p>
+
+<p>
+  <b>Ip address:</b>
+  <%=h @device.ip_address %>
+</p>
+
+<p>
+  <b>Mac address:</b>
+  <%=h @device.mac_address %>
+</p>
+
+
+<%= link_to 'Edit', edit_device_path(@device) %> |
+<%= link_to 'Back', devices_path %>

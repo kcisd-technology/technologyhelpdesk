@@ -1,0 +1,15 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  serial: MyString
+  description: MyText
+  hostname: MyString
+  ip_address: MyString
+  mac_address: MyString
+
+two:
+  serial: MyString
+  description: MyText
+  hostname: MyString
+  ip_address: MyString
+  mac_address: MyString
