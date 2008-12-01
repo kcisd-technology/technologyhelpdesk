@@ -14,10 +14,10 @@
       =link_to link_to 'Edit', edit_comment_path(comment)
       |
       =link_to link_to 'Destroy', comment, :confirm => 'Are you sure?', :method => :delete
-      -unless max_level <= 1
+      -if max_level > 1
         |
         =link_to "New Comment", new_comment_path(:parent_id => comment.id, :parent_type => "Comment")
   .body
     =comment.body.to_html
-    -unless max_level <= 1 || comment.comments.empty?
-      .children= render_comments(comment, divider);
+    -if max_level > 1 && !comment.comments.empty?
+      .children= render_comments(comment, max_level - 1, divider);
