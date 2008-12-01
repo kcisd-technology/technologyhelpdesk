@@ -1,0 +1,11 @@
+%div
+  %h2 Comments
+  %hr/
+  =render_comments tailing_comments
+-form_for Comment.new do |f|
+  =hidden_field_tag :return_to, url_for(tailing_comments)
+  =f.hidden_field :commentable_id, :value => tailing_comments.id
+  =f.hidden_field :commentable_type, :value => tailing_comments.class
+  %h3 New Comment
+  =f.text_area :body
+  =submit_tag 'Add Comment'
