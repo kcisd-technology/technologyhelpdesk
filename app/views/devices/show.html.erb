@@ -28,4 +28,4 @@
 <%= link_to 'Back', devices_path %>
 <hr />
 
-<%=render :partial => 'comments/tailing_comments', :object => @device %>
+<%=render_comments_with_form(@device) %>

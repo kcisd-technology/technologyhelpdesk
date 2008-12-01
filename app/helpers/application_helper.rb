@@ -16,6 +16,10 @@ module ApplicationHelper
       :spacer_template => divider) unless object.comments.empty?;
   end
   
+  def render_comments_with_form(object = nil, divider = 'comments/comments_divider')
+    render :partial => 'comments/tailing_comments', :object => object
+  end
+  
   def javascript_files(partial = nil)
     add_js_files("#{params[:controller]}_#{params[:action]}");
     file_names = @controller.instance_variable_get('@included_javascript_files');
