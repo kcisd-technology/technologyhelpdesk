@@ -9,10 +9,10 @@ module ApplicationHelper
     end
   end
   
-  def render_comments(object = nil, max_level = 5, divider = 'comments/comments_divider')
+  def render_comments(object = nil, max_level = 5, level = 0, divider = 'comments/comments_divider')
     render(:partial=> 'comments/comment',
       :collection => object.comments,
-      :locals => { :max_level => max_level, :divider => divider },
+      :locals => { :max_level => max_level, :level => level, :divider => divider },
       :spacer_template => divider) unless object.comments.empty?;
   end
   
