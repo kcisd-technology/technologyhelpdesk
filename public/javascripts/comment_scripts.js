@@ -11,13 +11,20 @@ var loadCommentControls = function() {
   });
 }
 var toggleComment = function(e) {
-  var commentBody = this.up(".comment").down(".body");
+  var that = this;
+  that.stopObserving('click');
+  that.observe('click', function(e){e.stop();})
+  var commentBody = that.up(".comment").down(".body");
+  var reattachEvent = function(){
+    that.stopObserving('click');
+    that.observe('click', toggleComment);
+  }
   if(commentBody.visible()){
-      Effect.BlindUp(commentBody);
-      this.update("Show Comment");
+      Effect.BlindUp(commentBody, {afterFinish : reattachEvent });
+      that.update("Show Comment");
   }else{
-      Effect.BlindDown(commentBody);
-      this.update("Hide Comment");
+      Effect.BlindDown(commentBody, {afterFinish : reattachEvent });
+      that.update("Hide Comment");
   }
   e.stop();
 }
