@@ -21,4 +21,4 @@ var toggleComment = function(e) {
   }
   e.stop();
 }
-Event.observe(window, 'load', loadCommentControls)
+Event.observe(document, 'dom:loaded', loadCommentControls)
