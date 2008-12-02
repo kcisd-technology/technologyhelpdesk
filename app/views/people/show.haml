@@ -1,0 +1,19 @@
+%p
+  %b First name:
+  =@person.first_name
+%p
+  %b Last name:
+  =@person.last_name
+%p
+  %b Middle name:
+  =@person.middle_name
+%p
+  %b Login name:
+  =@person.login_name
+%p
+  %b Email:
+  =@person.email
+=link_to 'Edit', edit_person_path(@person)
+|
+=link_to 'Back', people_path
+=render_comments_with_form(@person)
