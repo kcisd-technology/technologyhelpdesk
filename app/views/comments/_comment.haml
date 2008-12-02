@@ -2,6 +2,7 @@
 -max_level ||= 5
 -divider ||= 'comments/comments_divider'
 -indent ||= 15
+-show_children ||= true
 -add_css_files 'comments'
 -add_js_files 'effects', 'comment_scripts'
 .comment{:style=>"margin-left:#{indent}px"}
@@ -12,13 +13,13 @@
     %i= "Last Updated: #{comment.updated_at.strftime("%d %b %Y %I:%M%p")}"
   -if comment.full_control_by_current_user?
     .controls
-      =link_to link_to 'Edit', edit_comment_path(comment)
+      =link_to 'Edit', edit_comment_path(comment)
       |
-      =link_to link_to 'Destroy', comment, :confirm => 'Are you sure?', :method => :delete
-      -if max_level > 1
+      =link_to 'Destroy', comment, :confirm => 'Are you sure?', :method => :delete
+      -if max_level > 1 && show_children
         |
         =link_to "Reply to this comment", new_comment_path(:parent_id => comment.id, :parent_type => "Comment")
   .body
     .content= comment.body.to_html
-    -if max_level > 1 && !comment.comments.empty?
+    -if max_level > 1 && !comment.comments.empty? && show_children
       .children= render_comments(comment, max_level - 1, level + 1, divider);
