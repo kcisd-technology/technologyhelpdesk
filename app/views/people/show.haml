@@ -1,16 +1,9 @@
-%p
-  %b First name:
-  =@person.first_name
-%p
-  %b Last name:
-  =@person.last_name
-%p
-  %b Middle name:
-  =@person.middle_name
-%p
+%div
+  ="#{@person.last_name}, #{@person.first_name} #{@person.middle_name}"
+%div
   %b Login name:
   =@person.login_name
-%p
+%div
   %b Email:
   =@person.email
 =link_to 'Edit', edit_person_path(@person)
