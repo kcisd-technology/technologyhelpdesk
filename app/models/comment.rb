@@ -3,11 +3,15 @@ class Comment < ActiveRecord::Base
   belongs_to :user
   
   has_many :comments, :as => :commentable, :dependent => :destroy
+  def top_commentable
+    object = self.commentable;
+    object = object.commentable while object.is_a?(Comment);
+    object
+  end
   
   validates_presence_of :body
   
   acts_as_textile :body
-  #acts_as_markup :language => :redcloth, :columns => [:body]
   
   def before_create
     self.user_id = (User.current_user && User.current_user.id)
