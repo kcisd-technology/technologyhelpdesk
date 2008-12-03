@@ -9,6 +9,10 @@ class Comment < ActiveRecord::Base
     object
   end
   
+  def to_liquid
+    {'parent_object' => top_commentable }
+  end
+  
   validates_presence_of :body
   
   acts_as_textile :body
