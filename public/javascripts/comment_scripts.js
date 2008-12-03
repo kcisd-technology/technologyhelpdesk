@@ -20,10 +20,10 @@ var toggleComment = function(e) {
     that.observe('click', toggleComment);
   }
   if(commentBody.visible()){
-      Effect.BlindUp(commentBody, {afterFinish : reattachEvent });
+      Effect.SlideUp(commentBody, {afterFinish : reattachEvent });
       that.update("Show Comment");
   }else{
-      Effect.BlindDown(commentBody, {afterFinish : reattachEvent });
+      Effect.SlideDown(commentBody, {afterFinish : reattachEvent });
       that.update("Hide Comment");
   }
   e.stop();

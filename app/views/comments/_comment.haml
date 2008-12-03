@@ -20,6 +20,7 @@
         |
         =link_to "Reply to this comment", new_comment_path(:parent_id => comment.id, :parent_type => "Comment")
   .body
-    .content= RedCloth.new(Liquid::Template.parse(comment.body).render('parent_object' => comment.top_commentable)).to_html
-    -if max_level > 1 && !comment.comments.empty? && show_children
-      .children{:style=>"margin-left:#{indent}px"}= render_comments(comment, max_level - 1, level + 1, divider);
+    %div
+      .content= RedCloth.new(Liquid::Template.parse(comment.body).render('parent_object' => comment.top_commentable)).to_html
+      -if max_level > 1 && !comment.comments.empty? && show_children
+        .children{:style=>"margin-left:#{indent}px"}= render_comments(comment, max_level - 1, level + 1, divider);
