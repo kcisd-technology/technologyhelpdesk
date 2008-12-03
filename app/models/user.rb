@@ -3,8 +3,11 @@ require 'md5'
 class User < ActiveRecord::Base
   has_and_belongs_to_many :roles
   has_many :comments, :as => :commentable
+  has_many :comments
   # Virtual attribute for the unencrypted password
   attr_accessor :password
+  
+  liquid_methods :login, :email
 
   validates_presence_of     :login, :email
   validates_presence_of     :password,                   :if => :password_required?
