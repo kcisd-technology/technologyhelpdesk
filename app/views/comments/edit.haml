@@ -3,4 +3,4 @@
   =render :partial => 'form', :locals => { :f => f }
   %p
     = f.submit "Save"
-= link_to 'Back', (request.env['HTTP_REFERER'] || comments_path)
+=link_to 'Back', (request.env['HTTP_REFERER'] || comments_path)

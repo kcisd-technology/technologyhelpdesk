@@ -1,0 +1,5 @@
+-form_for(inline_form) do |f|
+  =render :partial => 'form', :locals => { :f => f }
+  %p
+    =link_to "Cancel", '#', :onclick => "$('comment_body_#{inline_form.id}').innerHTML = oldCommentBody_#{@comment.id}; return false;"
+    =f.submit "Save"

@@ -7,7 +7,10 @@ var loadCommentControls = function() {
     var toggleLink = new Element('a', { href:"#", 'class':'showToggle'});
     toggleLink.insert("Hide Comment");
     toggleLink.observe('click', toggleComment)
-    controls.insert({top: toggleLink});    
+    controls.insert({top: toggleLink});
+    
+    var editLink = comment.getElementsByClassName('edit-link')[0];
+    editLink.observe('click', createEditForm);
   });
 }
 var toggleComment = function(e) {
@@ -28,4 +31,10 @@ var toggleComment = function(e) {
   }
   e.stop();
 }
+
+var createEditForm = function(e){
+  new Ajax.Request( e.target.href, {evalScripts : true, method : 'get' });
+  e.stop();
+}
+
 Event.observe(document, 'dom:loaded', loadCommentControls)

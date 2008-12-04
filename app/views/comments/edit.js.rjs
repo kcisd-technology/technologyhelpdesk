@@ -1,0 +1,4 @@
+page << "oldCommentBody_#{@comment.id} = $('comment_body_#{@comment.id}').innerHTML;"
+page["comment_body_#{@comment.id}"].update(
+  render(:partial => 'inline_form', :object => @comment)
+);
