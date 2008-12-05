@@ -33,6 +33,9 @@ var toggleComment = function(e) {
 }
 
 var createEditForm = function(e){
+  var commentBody = this.up('.comment').down('.body').down('.content');
+  commentBody.oldHTML = commentBody.innerHTML;
+  commentBody.update(busyImageTag);
   new Ajax.Request( this.href, {evalScripts : true, method : 'get' });
   this.update("Cancel");
   this.stopObserving('click');
@@ -43,11 +46,20 @@ var createEditForm = function(e){
 var cancelCommentEdit = function(e) {
   var commentBody = this.up('.comment').down('.body').down('.content');
   var commentID = commentBody.id.gsub("comment_body_", '');
-  new Ajax.Updater(commentBody, "/comments/"+commentID+"/edit?cmd=cancel", {evalScripts : true, method : 'get' });
-  this.update("Edit");
-  this.stopObserving('click');
-  this.observe('click', createEditForm)
+  //commentBody.update(busyImageTag);
+  //new Ajax.Updater(commentBody, "/comments/"+commentID+"/edit?cmd=cancel", {evalScripts : true, method : 'get' });
+  commentBody.update(commentBody.oldHTML);
+  var editLink = commentBody.up('.comment').down('.edit-link');
+  editLink.update("Edit");
+  editLink.stopObserving('click');
+  editLink.observe('click', createEditForm)
   e.stop();
 }
+
+busyImage = new Image();
+busyImage.src = "/images/busy.gif";
+busyImageTag = new Element('div', {align:'center'}).update(
+  new Element('img', {src : busyImage.src})
+);
 
 Event.observe(document, 'dom:loaded', loadCommentControls)
