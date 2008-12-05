@@ -48,4 +48,12 @@ class ApplicationController < ActionController::Base
       @included_css_files << file unless @included_css_files.include?(file)
     end
   end
+  
+  helper_method :liquidize, :liquidize_comment
+  def liquidize( text, args )
+    RedCloth.new(Liquid::Template.parse(text).render(args)).to_html;
+  end
+  def liquidize_comment( comment )
+    liquidize(comment.body, 'parent_object' => comment.top_commentable)
+  end
 end

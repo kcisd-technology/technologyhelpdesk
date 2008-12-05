@@ -53,7 +53,24 @@ var cancelCommentEdit = function(e) {
   editLink.update("Edit");
   editLink.stopObserving('click');
   editLink.observe('click', createEditForm)
+  Effect.ScrollTo(commentBody.up('.comment'));
   e.stop();
+}
+
+var submitCommentChanges = function(e) {
+  var commentBody = this.up('.comment').down('.body').down('.content');
+  commentBody.update(busyImageTag);
+  new Ajax.Updater( commentBody, this.action, {
+    parameters : this.serialize(),
+    onComplete : function() {
+        Effect.ScrollTo(commentBody.up('.comment'));
+    }
+  });
+  e.stop();
+  var editLink = commentBody.up('.comment').down('.edit-link');
+  editLink.update("Edit");
+  editLink.stopObserving('click');
+  editLink.observe('click', createEditForm)
 }
 
 busyImage = new Image();

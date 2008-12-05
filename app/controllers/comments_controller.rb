@@ -47,9 +47,6 @@ class CommentsController < ApplicationController
   def edit
     @comment = Comment.find(params[:id])
     session[:return_to] = request.env['HTTP_REFERER'] unless request.xhr?
-    if params[:cmd] == 'cancel'
-      render :text => RedCloth.new(Liquid::Template.parse(@comment.body).render('parent_object' => @comment.top_commentable)).to_html
-    end
   end
 
   # POST /comments
@@ -78,7 +75,13 @@ class CommentsController < ApplicationController
     respond_to do |format|
       if @comment.update_attributes(params[:comment])
         flash[:notice] = 'Comment was successfully updated.'
-        format.html { redirect_to(@comment) }
+        format.html { 
+          if request.xhr?
+            render :text => liquidize_comment(@comment)
+          else
+            redirect_to(@comment)
+          end            
+        }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
