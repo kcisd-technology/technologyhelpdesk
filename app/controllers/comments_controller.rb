@@ -46,7 +46,10 @@ class CommentsController < ApplicationController
   # GET /comments/1/edit
   def edit
     @comment = Comment.find(params[:id])
-    session[:return_to] = request.env['HTTP_REFERER']
+    session[:return_to] = request.env['HTTP_REFERER'] unless request.xhr?
+    if params[:cmd] == 'cancel'
+      render :text => RedCloth.new(Liquid::Template.parse(@comment.body).render('parent_object' => @comment.top_commentable)).to_html
+    end
   end
 
   # POST /comments

@@ -33,7 +33,20 @@ var toggleComment = function(e) {
 }
 
 var createEditForm = function(e){
-  new Ajax.Request( e.target.href, {evalScripts : true, method : 'get' });
+  new Ajax.Request( this.href, {evalScripts : true, method : 'get' });
+  this.update("Cancel");
+  this.stopObserving('click');
+  this.observe('click', cancelCommentEdit);
+  e.stop();
+}
+
+var cancelCommentEdit = function(e) {
+  var commentBody = this.up('.comment').down('.body').down('.content');
+  var commentID = commentBody.id.gsub("comment_body_", '');
+  new Ajax.Updater(commentBody, "/comments/"+commentID+"/edit?cmd=cancel", {evalScripts : true, method : 'get' });
+  this.update("Edit");
+  this.stopObserving('click');
+  this.observe('click', createEditForm)
   e.stop();
 }
 
