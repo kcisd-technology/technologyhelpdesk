@@ -2,6 +2,7 @@ page["comment_body_#{@comment.id}"].update(
   render(:partial => 'inline_form', :object => @comment)
 );
 page << <<HEREDOC
-$('cancel_edit_#{@comment.id}').observe('click', cancelCommentEdit);
-$('comment_body_#{@comment.id}').down('form').observe('submit', submitCommentChanges);
+$('cancel_edit_#{@comment.id}').observe('click', THD.Comment.cancelCommentEdit);
+var form = $('comment_body_#{@comment.id}').down('form')
+form.observe('submit', THD.Comment.submitCommentChanges);
 HEREDOC
