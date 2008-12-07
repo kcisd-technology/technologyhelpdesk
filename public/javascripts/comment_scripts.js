@@ -47,9 +47,11 @@ Object.extend( THD, {
     },
     
     createEditForm : function(e){
-      var commentBody = this.up('.comment').down('.body').down('.content');
+      var comment = this.up('.comment');
+      var commentBody = comment.down('.body').down('.content');
       commentBody.oldHTML = commentBody.innerHTML;
       commentBody.update(THD.busyImageTag);
+      Effect.ScrollTo(comment);
       new Ajax.Request( this.href, {evalScripts : true, method : 'get' });
       this.update("Cancel");
       this.stopObserving('click');
@@ -58,7 +60,8 @@ Object.extend( THD, {
     },
     
     cancelCommentEdit : function(e) {
-      var commentBody = this.up('.comment').down('.body').down('.content');
+      var comment = this.up('.comment');
+      var commentBody = comment.down('.body').down('.content');
       commentBody.update(commentBody.oldHTML);
       THD.Comment.resetEditButton(
         commentBody.up('.comment').down('.edit-link')
@@ -69,12 +72,22 @@ Object.extend( THD, {
     
     submitCommentChanges : function(e) {
       var form = e.target;
-      var commentBody = form.up('.comment').down('.body').down('.content');
+      var comment = form.up('.comment');
+      var commentBody = comment.down('.body').down('.content');
       commentBody.update(THD.busyImageTag);
-      new Ajax.Updater( commentBody, form.action, {
+      new Ajax.Request( $(form).action, {
+      //new Ajax.Updater( commentBody, form.action, {
+        // The form is not being serialized at all in IE
         parameters : form.serialize(),
-        onComplete : function() {
-            Effect.ScrollTo(commentBody.up('.comment'));
+        onComplete : function(response) {
+            Effect.ScrollTo(comment);
+        },
+        onSuccess : function(response) {
+          commentBody.update(response.responseText);
+        },
+        onFailure : function(response) {
+          commentBody.update(commentBody.oldHTML);
+          alert('Your request failed, please try again later.')
         }
       });
       THD.Comment.resetEditButton(
