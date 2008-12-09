@@ -1,4 +1,7 @@
 class DevicesController < ApplicationController
+  
+  before_filter :login_required
+  access_control :DEFAULT => 'admin'
   # GET /devices
   # GET /devices.xml
   def index
