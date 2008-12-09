@@ -72,22 +72,21 @@ Object.extend( THD, {
     
     submitCommentChanges : function(e) {
       var form = e.target;
+      var params = form.serialize(true);
       var comment = form.up('.comment');
       var commentBody = comment.down('.body').down('.content');
-      commentBody.update(THD.busyImageTag);
-      new Ajax.Request( $(form).action, {
-      //new Ajax.Updater( commentBody, form.action, {
-        // The form is not being serialized at all in IE
-        parameters : form.serialize(),
+      new Ajax.Updater( commentBody, form.action, {
+        method : 'put',
+        // form.serialize() did not work in IE
+        //parameters : form.serialize(true),
+        // had to use:
+        parameters : params,
+        // wierd
         onComplete : function(response) {
             Effect.ScrollTo(comment);
         },
         onSuccess : function(response) {
           commentBody.update(response.responseText);
-        },
-        onFailure : function(response) {
-          commentBody.update(commentBody.oldHTML);
-          alert('Your request failed, please try again later.')
         }
       });
       THD.Comment.resetEditButton(
