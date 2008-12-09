@@ -1,13 +1,15 @@
 !!!
 %html
   %head
-    %title Technology Help Desk
+    %title= "Technology Help Desk" + (@page_title ? " - #{@page_title}" : '')
     -stylesheet_files;
     -javascript_files('layouts/javascript_file');
   %body
     #pageWrapper
       #pageTitle
         %h1 Technology Help Desk
+        -if @page_title
+          %h2= @page_title
       #sideBar
         -if logged_in?
           #gravatar= current_user.gravatar

@@ -1,18 +1,15 @@
+<% @page_title = @howto.title -%>
 <p>
-  <b>Title:</b>
-  <%=h @howto.title %>
-</p>
-
-<p>
-  <b>Body:</b>
-  <%=h @howto.body %>
+  <%= liquidize(@howto.body) %>
 </p>
 
 <p>
   <b>User:</b>
-  <%=h @howto.user %>
+  <%=h @howto.user.login %>
 </p>
 
 
 <%= link_to 'Edit', edit_howto_path(@howto) %> |
 <%= link_to 'Back', howtos_path %>
+
+<%= render_comments_with_form(@howto) %>

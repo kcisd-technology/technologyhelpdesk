@@ -50,7 +50,7 @@ class ApplicationController < ActionController::Base
   end
   
   helper_method :liquidize, :liquidize_comment
-  def liquidize( text, args )
+  def liquidize( text, args = {} )
     RedCloth.new(Liquid::Template.parse(text).render(args)).to_html;
   end
   def liquidize_comment( comment )

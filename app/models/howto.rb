@@ -1,5 +1,5 @@
 class Howto < ActiveRecord::Base
-  belongs_to :commentable, :polymorphic => true
+  has_many :comments, :as => :commentable, :dependent => :destroy
   belongs_to :user
   
   def before_create
