@@ -1,0 +1,18 @@
+<p>
+  <b>Title:</b>
+  <%=h @howto.title %>
+</p>
+
+<p>
+  <b>Body:</b>
+  <%=h @howto.body %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%=h @howto.user %>
+</p>
+
+
+<%= link_to 'Edit', edit_howto_path(@howto) %> |
+<%= link_to 'Back', howtos_path %>
