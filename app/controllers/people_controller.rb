@@ -1,4 +1,7 @@
 class PeopleController < ApplicationController
+  
+  before_filter :login_required
+  access_control :DEFAULT => 'admin'
   # GET /people
   # GET /people.xml
   def index
