@@ -5,7 +5,7 @@
 -show_children ||= true
 -add_css_files 'comments'
 -add_js_files 'effects', 'comment_scripts'
-.comment
+.comment{:id => "comment_#{comment.id}"}
   =comment.user.gravatar(:size => 60, :options => {:style=> 'float:left;margin-right:5px'})
   %div
     ="#{comment.user.login} said on #{comment.created_at.strftime("%d %b %Y %I:%M%p")}"
