@@ -3,6 +3,9 @@ page["comment_body_#{@comment.id}"].update(
 );
 page << <<HEREDOC
 $('cancel_edit_#{@comment.id}').observe('click', THD.Comment.cancelCommentEdit);
+var comment = $('comment_#{@comment.id}')
 var form = $('comment_body_#{@comment.id}').down('form')
+var editLink = comment.down('.edit-link');
 form.observe('submit', THD.Comment.submitCommentChanges);
+THD.Comment.disableEditLink( editLink );
 HEREDOC

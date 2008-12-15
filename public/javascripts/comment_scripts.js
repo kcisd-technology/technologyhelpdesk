@@ -24,6 +24,9 @@ Object.extend( THD, {
 
         var editLink = comment.getElementsByClassName('edit-link')[0];
         editLink.observe('click', THD.Comment.createEditForm);
+        
+        var deleteLink = comment.down('.delete-link');
+        deleteLink.observe('click', THD.Comment.deleteComment);
       });
     },
     
@@ -53,9 +56,7 @@ Object.extend( THD, {
       commentBody.update(THD.busyImageTag);
       Effect.ScrollTo(comment);
       new Ajax.Request( this.href, {evalScripts : true, method : 'get' });
-      this.update("Cancel");
-      this.stopObserving('click');
-      this.observe('click', THD.Comment.cancelCommentEdit);
+      THD.Comment.disableEditLink( this );
       e.stop();
     },
     
@@ -64,7 +65,7 @@ Object.extend( THD, {
       var commentBody = comment.down('.body').down('.content');
       commentBody.update(commentBody.oldHTML);
       THD.Comment.resetEditButton(
-        commentBody.up('.comment').down('.edit-link')
+        comment.down('.edit-link')
       );
       Effect.ScrollTo(commentBody.up('.comment'));
       e.stop();
@@ -75,28 +76,64 @@ Object.extend( THD, {
       var params = form.serialize(true);
       var comment = form.up('.comment');
       var commentBody = comment.down('.body').down('.content');
-      new Ajax.Updater( commentBody, form.action, {
+      new Ajax.Request( form.action, {
         method : 'put',
-        // form.serialize() did not work in IE
-        //parameters : form.serialize(true),
-        // had to use:
+        evalScripts : true,
         parameters : params,
-        // wierd
         onComplete : function(response) {
             Effect.ScrollTo(comment);
         },
         onSuccess : function(response) {
           commentBody.update(response.responseText);
+        },
+        onFailure : function() {
         }
       });
       THD.Comment.resetEditButton(
-        commentBody.up('.comment').down('.edit-link')
+        comment.down('.edit-link')
       );
       e.stop();
     },
     
-    resetEditButton : function(button) {
-      button.update("Edit").stopObserving('click').observe(
+    deleteComment : function(e) {
+      if(confirm("Are you sure?")){
+        var comment = this.up('.comment');
+        var commentURL = this.href.gsub(/\/delete/, '');
+        var token = $F($$('input[name="authenticity_token"]')[0])
+        
+        var busy = new Element('div',{style:'height:25px;background-color:#ff0'});
+        busy.update(
+          (new Element('div', {style:'float:left;'})).update("Deleteing")
+        ).insert(THD.busyImageTag);
+        comment.insert({top: busy});
+        
+        new Ajax.Request( commentURL, {
+          method : 'delete',
+          parameters : {
+            'authenticity_token' : token
+          },
+          onSuccess : function() {
+            Effect.BlindUp(comment, {
+              afterFinish : function() { comment.remove(); }
+            });
+          },
+          onFailure : function() {
+            alert( 'it failed');
+            busy.remove();
+          }
+        })
+      }
+      e.stop();
+    },
+    
+    disableEditLink : function( link ) {
+      link.update("Cancel").stopObserving('click').observe(
+        'click', THD.Comment.cancelCommentEdit
+      );
+    },
+    
+    resetEditButton : function( link ) {
+      link.update("Edit").stopObserving('click').observe(
         'click', THD.Comment.createEditForm
       );
     }

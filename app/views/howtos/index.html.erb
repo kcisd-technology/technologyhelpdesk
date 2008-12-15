@@ -1,0 +1,14 @@
+<table>
+
+<% for howto in @howtos %>
+  <tr>
+    <td><%= link_to howto.title, howto %></td>
+    <td><%= link_to 'Edit', edit_howto_path(howto) %></td>
+    <td><%= link_to 'Destroy', howto, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New howto', new_howto_path %>

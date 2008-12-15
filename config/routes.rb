@@ -1,19 +1,28 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :devices
+  map.resources :howtos,
+    :has_many => :comments
 
-  map.resources :people
-  
-  map.resources :comments
+  map.resources :devices,
+    :has_many => :comments
 
-  map.resources :softwares
+  map.resources :people,
+    :has_many => :comments
+
+  map.resources :softwares,
+    :has_many => :comments
 
   map.resources :roles
 
-  map.resources :users
+  map.resources :users,
+    :has_many => :comments
 
   map.resource :session
 
   map.resources :settings
+  
+  map.resources :comments,
+    :member => {:delete => :get},
+    :has_many => :comments
 
   # The priority is based upon order of creation: first created -> highest priority.
 

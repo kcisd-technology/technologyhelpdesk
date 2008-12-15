@@ -15,10 +15,10 @@
     .controls
       =link_to 'Edit', edit_comment_path(comment), :class => 'edit-link'
       |
-      =link_to 'Destroy', comment, :confirm => 'Are you sure?', :method => :delete
+      =link_to 'Delete', delete_comment_path(comment), :class => 'delete-link'
       -if max_level > 1 && show_children
         |
-        =link_to "Reply to this comment", new_comment_path(:parent_id => comment.id, :parent_type => "Comment")
+        =link_to "Reply to this comment", new_comment_comment_path(comment), :class => 'comment-reply-link'
   .body
     %div
       .content{:id => "comment_body_#{comment.id}"}= liquidize_comment(comment)
