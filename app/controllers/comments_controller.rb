@@ -20,10 +20,7 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       format.html {
-        if session[:return_to]
-          redirect_to session[:return_to]
-          session[:return_to] = nil
-        end
+        redirect_to @comment.top_commentable
       }
       format.xml  { render :xml => @comment }
     end
@@ -32,10 +29,8 @@ class CommentsController < ApplicationController
   # GET /comments/new
   # GET /comments/new.xml
   def new
-    @comment = Comment.new
-    @comment.commentable_id = params[:parent_id]
-    @comment.commentable_type = params[:parent_type]
-    session[:return_to] = request.env['HTTP_REFERER']
+    @parent = parent_object
+    @comment = @parent.comments.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -46,14 +41,13 @@ class CommentsController < ApplicationController
   # GET /comments/1/edit
   def edit
     @comment = Comment.find(params[:id])
-    session[:return_to] = request.env['HTTP_REFERER'] unless request.xhr?
   end
 
   # POST /comments
   # POST /comments.xml
   def create
-    @comment = Comment.new(params[:comment])
-    session[:return_to] = request.env['HTTP_REFERER'] unless session[:return_to]
+    @parent = parent_object
+    @comment = @parent.comments.new(params[:comment])
 
     respond_to do |format|
       if @comment.save
@@ -85,6 +79,7 @@ class CommentsController < ApplicationController
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
+        format.js { render :action => "edit", :status => :unprocessable_entity }
         format.xml  { render :xml => @comment.errors, :status => :unprocessable_entity }
       end
     end
@@ -94,11 +89,28 @@ class CommentsController < ApplicationController
   # DELETE /comments/1.xml
   def destroy
     @comment = Comment.find(params[:id])
+    @parent = params[:commit] && @comment.top_commentable
     @comment.destroy
+    @parent && flash[:notice] = "Comment was deleted"
 
     respond_to do |format|
-      format.html { redirect_to(:back) }
+      format.html { redirect_to(@parent || :back) }
       format.xml  { head :ok }
+    end
+  end
+  
+  def delete
+    @comment = Comment.find(params[:id])
+  end
+  
+  protected
+  def parent_object
+    case
+    when params[:comment_id] then Comment.find(params[:comment_id])
+    when params[:howto_id] then Howto.find(params[:howto_id])
+    when params[:device_id] then Device.find(params[:device_id])
+    when params[:software_id] then Software.find(params[:software_id])
+    else raise ActiveRecord::RecordNotFound
     end
   end
   

@@ -1,18 +1,10 @@
 <h1>Listing howtos</h1>
 
 <table>
-  <tr>
-    <th>Title</th>
-    <th>Body</th>
-    <th>User</th>
-  </tr>
 
 <% for howto in @howtos %>
   <tr>
-    <td><%=h howto.title %></td>
-    <td><%=h howto.body %></td>
-    <td><%=h howto.user %></td>
-    <td><%= link_to 'Show', howto %></td>
+    <td><%= link_to howto.title, howto %></td>
     <td><%= link_to 'Edit', edit_howto_path(howto) %></td>
     <td><%= link_to 'Destroy', howto, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>

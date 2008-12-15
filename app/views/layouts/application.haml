@@ -22,7 +22,8 @@
             %li= link_to "Role Management", roles_path
             %li= link_to "Software Management", softwares_path
             %li= link_to "Device Management", devices_path
+            %li= link_to "HowTos", howtos_path
       #pageContent
         #flashNotice= flash[:notice]
         =yield
-      #pageFooter= ' '
+      #pageFooter= token_tag

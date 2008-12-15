@@ -29,10 +29,10 @@ module ApplicationHelper
       end
     else
       if partial
-        concat(capture{render(:partial => partial, :collection => file_names)});
+        concat(render(:partial => partial, :collection => file_names));
       else
         file_names.each do |file|
-          concat(capture{javascript_include_tag(file)+"\n"});
+          concat(javascript_include_tag(file)+"\n");
         end
       end
     end
@@ -47,10 +47,10 @@ module ApplicationHelper
       end
     else
       if partial
-        concat(capture{render(:partial => partial, :collection => file_names)});
+        concat( render(:partial => partial, :collection => file_names));
       else
         file_names.each do |file|
-          concat(capture{stylesheet_link_tag(file)+"\n"});
+          concat(stylesheet_link_tag(file)+"\n");
         end
       end
     end
