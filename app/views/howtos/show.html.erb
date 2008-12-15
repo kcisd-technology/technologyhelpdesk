@@ -1,14 +1,8 @@
 <% @page_title = @howto.title -%>
+<p>By: <%= @howto.user.login %></p>
 <p>
   <%= liquidize(@howto.body) %>
 </p>
-
-<p>
-  <b>User:</b>
-  <%=h @howto.user.login %>
-</p>
-
-
 <%= link_to 'Edit', edit_howto_path(@howto) %> |
 <%= link_to 'Back', howtos_path %>
 
