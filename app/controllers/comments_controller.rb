@@ -110,6 +110,7 @@ class CommentsController < ApplicationController
     when params[:howto_id] then Howto.find(params[:howto_id])
     when params[:device_id] then Device.find(params[:device_id])
     when params[:software_id] then Software.find(params[:software_id])
+    when params[:person_id] then Person.find(params[:person_id])
     else raise ActiveRecord::RecordNotFound
     end
   end
