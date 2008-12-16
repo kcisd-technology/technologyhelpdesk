@@ -99,7 +99,6 @@ Object.extend( THD, {
       if(confirm("Are you sure?")){
         var comment = this.up('.comment');
         var commentURL = this.href.gsub(/\/delete/, '');
-        var token = $F($$('input[name="authenticity_token"]')[0])
         
         var busy = new Element('div',{style:'height:25px;background-color:#ff0'});
         busy.update(
@@ -110,7 +109,7 @@ Object.extend( THD, {
         new Ajax.Request( commentURL, {
           method : 'delete',
           parameters : {
-            'authenticity_token' : token
+            'authenticity_token' : THD.AuthenticityToken
           },
           onSuccess : function() {
             Effect.Puff(comment, {
