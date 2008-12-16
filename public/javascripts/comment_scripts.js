@@ -113,7 +113,7 @@ Object.extend( THD, {
             'authenticity_token' : token
           },
           onSuccess : function() {
-            Effect.BlindUp(comment, {
+            Effect.Puff(comment, {
               afterFinish : function() { comment.remove(); }
             });
           },
