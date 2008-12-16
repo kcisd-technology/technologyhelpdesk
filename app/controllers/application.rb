@@ -19,7 +19,7 @@ class ApplicationController < ActionController::Base
   
   helper_method :add_js_files
   def add_js_files(*args)
-    @included_javascript_files ||= ['prototype', 'application'];
+    @included_javascript_files ||= ['prototype', 'application', 'system'];
     if args.size > 1
       args.each do |arg|
         add_js_files(arg);
