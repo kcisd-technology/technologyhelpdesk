@@ -22,11 +22,11 @@ Object.extend( THD, {
         toggleLink.observe('click', THD.Comment.toggleComment)
         controls.insert({top: toggleLink});
 
-        var editLink = comment.getElementsByClassName('edit-link')[0];
-        editLink.observe('click', THD.Comment.createEditForm);
+        var editLink = comment.down('.edit-link');
+        if(editLink) editLink.observe('click', THD.Comment.createEditForm);
         
         var deleteLink = comment.down('.delete-link');
-        deleteLink.observe('click', THD.Comment.deleteComment);
+        if(deleteLink) deleteLink.observe('click', THD.Comment.deleteComment);
       });
     },
     
@@ -113,7 +113,13 @@ Object.extend( THD, {
           },
           onSuccess : function() {
             Effect.Puff(comment, {
-              afterFinish : function() { comment.remove(); }
+              afterFinish : function() {
+                var divider = comment.previous('.comment-divider') || false;
+                var container = comment.up('.children') || false;
+                if(divider) divider.remove();
+                comment.remove();
+                if(container && container.empty()) container.remove();
+              }
             });
           },
           onFailure : function() {
