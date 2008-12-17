@@ -24,7 +24,6 @@ class HowtosController < ApplicationController
   # GET /howtos/new
   # GET /howtos/new.xml
   def new
-    parent = parent_object;
     @howto = Howto.new
 
     respond_to do |format|
