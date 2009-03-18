@@ -1,3 +1,11 @@
+== Technology Helpdesk
+
+This a just a little program I'm working on to help my co-workers and I keep track of different 
+types of information.  It is no where near finished, but if you would like to play with it, add 
+to it or take away from it, by all means fork it.  Once you create a database.yml file, run the 
+migrations and it will create a user named root with a password of blah.  Have fun and please
+share.
+
 == Welcome to Rails
 
 Rails is a web-application framework that includes everything needed to create 
